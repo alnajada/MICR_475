@@ -1,0 +1,12 @@
+---
+title: "Homework 1"
+output: github_document
+---
+
+This is homework 1 of MICR_575. I had __troubles__ making the notebook because of missing packages, but problem *solved*.
+
+
+```{r}
+2+2
+```
+
