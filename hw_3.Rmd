@@ -1,0 +1,17 @@
+---
+title: "Homework_3"
+output: github_document
+---
+
+I was having troubles knitting the file and commit it to github. Also, babynames data is very large it takes my laptop long time to generate the plot, knit, and commit.
+
+
+```{r}
+library(babynames)
+library(tidyverse)
+head(babynames)
+
+ggplot(data = babynames) +
+  geom_point(mapping = aes(x = name, y = year, color = "class"))
+```
+
