@@ -74,7 +74,7 @@ head(flights)
 ``` r
 AA_flights = filter(flights, carrier == "AA")
 ggplot(data = AA_flights) +
-   geom_point(mapping = aes(x = dep_delay, y = arr_delay, color = "class"))
+   geom_point(mapping = aes(x = dep_delay, y = arr_delay, color = origin))
 ```
 
     ## Warning: Removed 782 rows containing missing values (geom_point).
