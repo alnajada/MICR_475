@@ -1,0 +1,31 @@
+---
+title: "Homework_4"
+output: github_document
+---
+
+This is homework 4.
+
+part1
+
+```{r}
+a <- 3
+b <- 2
+print(a+b)
+sum(a, b)
+sum(3, 2)
+```
+
+
+part2
+
+```{r, eval=TRUE}
+library(tidyverse)
+library(nycflights13)
+data("flights")
+names(flights)
+head(flights)
+AA_flights = filter(flights, carrier == "AA")
+ggplot(data = AA_flights) +
+   geom_point(mapping = aes(x = dep_delay, y = arr_delay, color = "class"))
+```
+
