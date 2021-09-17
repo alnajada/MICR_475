@@ -1,0 +1,54 @@
+---
+title: "Homework_5"
+output: github_document
+---
+
+
+# Part_1
+
+```{r, message=FALSE}
+library(tidyverse)
+data("diamonds")
+names(diamonds)
+diamonds %>% count(cut)
+```
+
+# Part_2
+
+```{r}
+diamonds1 <- sample_n(diamonds, 539, replace = TRUE)
+glimpse(diamonds1)
+```
+
+
+# Part_3
+
+```{r}
+clarity_carat <- diamonds %>%
+  group_by(clarity) %>%
+  slice_max(carat, n=100) %>%
+  summarise(average.size = mean (carat, na.rm = TRUE))
+print(clarity_carat)
+```
+
+
+# Part_4
+
+```{r}
+ggplot(data = diamonds) +
+   geom_point(mapping = aes(x = x, y = y, color = clarity))
+ggplot(data = diamonds) +
+   geom_point(mapping = aes(x = x, y = z, color = clarity))
+```
+
+
+# Part_5
+
+```{r}
+diamonds2 <- filter(diamonds, x > 3 & z < 10 & y < 20 & z > 2)
+ggplot(data = diamonds2) +
+   geom_point(mapping = aes(x = x, y = y, color = clarity))
+ggplot(data = diamonds2) +
+   geom_point(mapping = aes(x = x, y = z, color = clarity))
+```
+
