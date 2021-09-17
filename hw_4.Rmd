@@ -3,9 +3,8 @@ title: "Homework_4"
 output: github_document
 ---
 
-This is homework 4.
 
-part1
+# part_1
 
 ```{r}
 a <- 3
@@ -16,9 +15,9 @@ sum(3, 2)
 ```
 
 
-part2
+# part_2
 
-```{r, eval=TRUE}
+```{r, message=FALSE}
 library(tidyverse)
 library(nycflights13)
 data("flights")
