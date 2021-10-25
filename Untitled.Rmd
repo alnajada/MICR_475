@@ -1,0 +1,77 @@
+---
+title: "lecture_6th_october"
+output: html_notebook
+---
+
+
+```{r, message=FALSE}
+library(gapminder)
+library(tidyverse)
+```
+
+
+```{r}
+theme-set()
+ggplot(gapminder, aes(x=year, y=lifeExp, group=country)) +
+  geom_line(alpha=.33)
+```
+
+
+# Linear regression 
+
+```{r}
+all_by_year <- lm(formula = lifeExp ~ year, data = gapminder)
+summary(all_by_year)
+```
+
+note: in console
+> str(all_by_year)
+
+Linear regression of two varibles 
+
+```{r}
+all_by_year_cont <- lm(formula = lifeExp ~ year + continent, data = gapminder)
+summary(all_by_year_cont)
+```
+
+Model of two continuous variables
+
+```{r}
+all_by_GDP <- lm(formula = lifeExp ~ year + gdpPercap, data = gapminder)
+summary(all_by_GDP)
+```
+
+note: in console
+> plot(all_by_year), and press enter to see different plots
+
+# List columns
+
+```{r}
+g_nest <- gapminder %>%
+  group_by(country, continent) %>%
+  nest()
+
+```
+
+
+```{r}
+# make a function to create the linear models we want
+exp_by_year <- function(df) {
+  m <- lm(lifeExp ~ year, data=df)
+  m
+}
+
+g_nest <- g_nest %>%
+  mutate(fit = map(data, exp_by_year))
+get_slope <- function(fit_obj){
+  slope <- coef(fit_obj)[2]
+  slope
+}
+
+g_nest <- %>%
+  mutate(slope = map(fit, get_slope))
+
+ggplot(g_nest, aes(x=continent, y=slope)) +
+  geom_boxplot()
+```
+
