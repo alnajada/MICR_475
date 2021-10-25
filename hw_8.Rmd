@@ -1,0 +1,192 @@
+---
+title: "Homework_8"
+output: github_document
+---
+
+# Question_1
+
+```{r, message=FALSE}
+library(tidyverse)
+library(modelr)
+data("diamonds")
+
+ggplot(data = diamonds) +
+  geom_point(aes(x = carat, y = price, color = color))
+
+
+ggplot(data = diamonds) +
+  geom_line(aes(x = carat, y = price))
+
+
+```
+
+
+
+```{r}
+all_by_carat <- lm(formula = carat ~ price + color, data = diamonds)
+summary(all_by_carat)
+```
+
+```{r}
+g_nest <- diamonds %>%
+  group_by(color) %>%
+  nest()
+
+```
+
+
+
+```{r}
+
+exp_by_carat <- function(df) {
+  m <- lm(price ~ carat, data=df)
+  m
+}
+
+
+g_nest <- g_nest %>%
+  mutate(fit = map(data, exp_by_carat))
+
+get_slope <- function(fit_obj){
+  slope <- coef(fit_obj)[2]
+  slope
+}
+
+g_nest <- g_nest %>%
+  mutate(slope = map_dbl(fit, get_slope))
+
+  
+ggplot(g_nest, aes(x=color, y=slope, color = color)) +
+  geom_point()
+```
+
+
+
+# Question_2
+
+  # Square-root model
+    
+```{r, message=FALSE}
+library(nls2)
+data("DNase")
+
+fst_mod <- formula(density ~ beta_1 * sqrt(conc) + beta_0)
+
+
+by_run <- DNase %>% 
+  group_by(Run) %>% 
+  nest()
+
+run_model <- function(DNase) {
+  nls2(fst_mod, 
+                    data = DNase, 
+                    start = list(beta_1 = 0.5, beta_0 = 0.1))
+}
+
+
+by_run1 <- by_run %>% 
+  mutate(model1 = map(data, run_model))
+
+
+glance <- by_run1 %>% 
+  mutate(glance = map(model1, broom::glance)) %>% 
+  unnest(glance)
+
+glance %>%
+  arrange(AIC) %>%
+  head()
+
+
+ggplot(glance, aes(x=Run, y=AIC), color = color) + 
+  geom_point()
+```
+
+
+  # Monod model 
+
+```{r, message=FALSE}
+snd_mod <- formula(density ~ (conc * d_max) / (conc + k))
+
+
+by_run <- DNase %>% 
+  group_by(Run) %>% 
+  nest()
+
+run2_model <- function(DNase) {
+  nls2(snd_mod, 
+                    data = DNase, 
+                    start = list(d_max = 0.5, k = 0.1))
+}
+
+by_run2 <- by_run %>% 
+  mutate(model2 = map(data, run2_model))
+
+
+glance2 <- by_run2 %>% 
+  mutate(glance = map(model2, broom::glance)) %>% 
+  unnest(glance)
+
+glance2 %>%
+  arrange(AIC) %>%
+  head()
+
+
+ggplot(glance2, aes(x=Run, y=AIC)) + 
+  geom_point()
+```
+
+
+The Monod model has lower AIC value than the Square-root model; therefore, the Monod model is better.
+
+
+
+# Extra work
+
+```{r}
+ggplot(data = DNase) +
+  geom_point(aes(x = conc, y = density, color = Run))
+
+DNase %>% 
+  ggplot(aes(conc, density)) + 
+  geom_line() + 
+  ggtitle("Full data = ")
+```
+
+
+
+  # Square-root model prediction
+  
+```{r}
+by_run_1 <- by_run1 %>% 
+  mutate(
+    predict = map2(data, model1, add_predictions)
+  )
+
+predict <- unnest(by_run_1, predict)
+
+predict %>%
+ggplot(aes(density, pred)) +
+    geom_line(aes(group = Run), alpha = 1 / 3) + 
+    geom_smooth(se = FALSE) + 
+  ggtitle("Square root model  ")
+```
+
+
+  # Monod model prediction
+  
+```{r}
+by_run_2 <- by_run2 %>% 
+  mutate(
+    predict2 = map2(data, model2, add_predictions)
+  )
+
+predict2 <- unnest(by_run_2, predict2)
+
+predict2 %>%
+ggplot(aes(density, pred)) +
+    geom_line(aes(group = Run), alpha = 1 / 3) + 
+    geom_smooth(se = FALSE) +
+  ggtitle("Monod model ")
+```
+  
+  
