@@ -22,3 +22,5 @@ The following plot a good plot. The plot represents a comparison in lipids produ
 -   The data shown are continous data. The data (Time) is mapped to the x-axis. The data (concentration; glucose/lipids) is mapped to the y-axis. The data are shown by lines and points.
 
 -   In both figures, we can clearly see the detaled data sets variations represented by every point in different colors.
+
+...

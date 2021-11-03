@@ -20,6 +20,8 @@ The following plot is a bad plot in my opinion. The plot represents a growth cur
 _How to improve:_ use colors, use clear data points with different shapes to differentiate between different data sets.
 
 
+
+
 # good plot
 
 The following plot a good plot. The plot represents a comparison in lipids productions between the original strain and the mutant strain. 
@@ -33,3 +35,4 @@ The following plot a good plot. The plot represents a comparison in lipids produ
 - In both figures, we can clearly see the detaled data sets variations represented by every point in different colors.
 
 
+...
