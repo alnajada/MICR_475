@@ -5,7 +5,7 @@ Homework\_6
 
 The following plot is a bad plot in my opinion. The plot represents a growth curve of three different wild type strains in two different substrates.
 
--   ![bad\_plot](/Users/AliAbdulaziz/Desktop/UTK/Fall2021/MICR575/MICR_575/bad_plot.png)
+-   ![bad\_plot](https://github.com/alnajada/MICR_475/bad_plot.png)
 
 -   The data shown are continous data. The data (Time) is mapped to the x-axis. The data (optical density OD) is mapped to the y-axis. The y-axis is the log of the OD data, and the data are shown by lines, dots, and cuted lines.
 
@@ -17,7 +17,7 @@ The following plot is a bad plot in my opinion. The plot represents a growth cur
 
 The following plot a good plot. The plot represents a comparison in lipids productions between the original strain and the mutant strain.
 
--   ![good\_plot](/Users/AliAbdulaziz/Desktop/UTK/Fall2021/MICR575/MICR_575/good_plot.png)
+-   ![good\_plot](https://github.com/alnajada/MICR_475/good_plot.png)
 
 -   The data shown are continous data. The data (Time) is mapped to the x-axis. The data (concentration; glucose/lipids) is mapped to the y-axis. The data are shown by lines and points.
 
