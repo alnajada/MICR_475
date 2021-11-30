@@ -15,13 +15,6 @@ ggplot(data = diamonds) +
 ![](hw_8_files/figure-markdown_github/unnamed-chunk-1-1.png)
 
 ``` r
-ggplot(data = diamonds) +
-  geom_line(aes(x = carat, y = price))
-```
-
-![](hw_8_files/figure-markdown_github/unnamed-chunk-1-2.png)
-
-``` r
 all_by_carat <- lm(formula = carat ~ price + color, data = diamonds)
 summary(all_by_carat)
 ```
@@ -84,7 +77,7 @@ ggplot(g_nest, aes(x=color, y=slope, color = color)) +
 
 # Question\_2
 
-\# Square-root model
+## Square-root model
 
 ``` r
 library(nls2)
@@ -136,7 +129,7 @@ ggplot(glance, aes(x=Run, y=AIC), color = color) +
 
 ![](hw_8_files/figure-markdown_github/unnamed-chunk-5-1.png)
 
-\# Monod model
+## Monod model
 
 ``` r
 snd_mod <- formula(density ~ (conc * d_max) / (conc + k))
@@ -204,7 +197,7 @@ DNase %>%
 
 ![](hw_8_files/figure-markdown_github/unnamed-chunk-7-2.png)
 
-\# Square-root model prediction
+## Square-root model prediction
 
 ``` r
 by_run_1 <- by_run1 %>% 
@@ -225,7 +218,7 @@ ggplot(aes(density, pred)) +
 
 ![](hw_8_files/figure-markdown_github/unnamed-chunk-8-1.png)
 
-\# Monod model prediction
+## Monod model prediction
 
 ``` r
 by_run_2 <- by_run2 %>% 

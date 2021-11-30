@@ -12,12 +12,6 @@ data("diamonds")
 
 ggplot(data = diamonds) +
   geom_point(aes(x = carat, y = price, color = color))
-
-
-ggplot(data = diamonds) +
-  geom_line(aes(x = carat, y = price))
-
-
 ```
 
 
@@ -64,7 +58,7 @@ ggplot(g_nest, aes(x=color, y=slope, color = color)) +
 
 # Question_2
 
-  # Square-root model
+## Square-root model
     
 ```{r, message=FALSE}
 library(nls2)
@@ -102,7 +96,7 @@ ggplot(glance, aes(x=Run, y=AIC), color = color) +
 ```
 
 
-  # Monod model 
+## Monod model 
 
 ```{r, message=FALSE}
 snd_mod <- formula(density ~ (conc * d_max) / (conc + k))
@@ -154,7 +148,7 @@ DNase %>%
 
 
 
-  # Square-root model prediction
+## Square-root model prediction
   
 ```{r}
 by_run_1 <- by_run1 %>% 
@@ -172,7 +166,7 @@ ggplot(aes(density, pred)) +
 ```
 
 
-  # Monod model prediction
+## Monod model prediction
   
 ```{r}
 by_run_2 <- by_run2 %>% 
