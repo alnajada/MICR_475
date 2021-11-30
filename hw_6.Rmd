@@ -34,5 +34,4 @@ The following plot a good plot. The plot represents a comparison in lipids produ
 
 - In both figures, we can clearly see the detaled data sets variations represented by every point in different colors.
 
-
 ...
